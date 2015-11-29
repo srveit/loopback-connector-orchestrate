@@ -112,6 +112,14 @@ describe('loopback-connector-orchestrate', function () {
           expect(types).toContain('db');
           done();
         });
+        it('should include "nosql"', function (done) {
+          expect(types).toContain('nosql');
+          done();
+        });
+        it('should include "orchestrate"', function (done) {
+          expect(types).toContain('orchestrate');
+          done();
+        });
       });
       describe('and connect is called again', function () {
         beforeEach(function (done) {

@@ -6,7 +6,8 @@ var gulp = require('gulp'),
   config = {};
 
 config.paths = {
-  coverage: 'reports'
+  coverage: 'reports',
+  doc: 'docs'
 };
 
 config.lint = {
@@ -37,11 +38,13 @@ config.jasmine = {
 };
 
 config.files = {
+  doc: 'lib/orchestrate.js',
   js: ['index.js', 'lib/orchestrate.js'],
   tests: ['test/**/*.spec.js'],
   lint: {
     js: [
       '**/*.js',
+      '!docs/**/*',
       '!node_modules/**/*',
       '!reports/**/*'
     ],
@@ -105,14 +108,23 @@ gulp.task('test', gulp.series(
 
 gulp.task('test:watch', function () {
   gulp.watch(config.files.tests.concat([config.files.js]),
-             gulp.series('lint', 'test'));
+             gulp.series('lint', 'test', 'jsdoc'));
+});
+
+gulp.task('jsdoc', function () {
+  return gulp.src(config.files.doc, {read: false})
+    .pipe(plugins.shell([
+      'jsdoc -d <%= config.paths.doc %> <%= file.path %>'
+    ], {
+      templateData: {
+        config: config
+      }
+    }));
 });
 
 gulp.task('default', gulp.series(
   'lint',
   'test',
+  'jsdoc',
   'test:watch'
 ));
-
-
-

@@ -35,7 +35,9 @@
     "gulp-jslint": "^0.2.2",
     "gulp-jsonlint": "^1.1.1",
     "gulp-load-plugins": "^1.1.0",
+    "gulp-shell": "^0.5.1",
     "jasmine-core": "^2.3.4",
-    "jasmine-spec-reporter": "^2.4.0"
+    "jasmine-spec-reporter": "^2.4.0",
+    "jsdoc": "^3.4.0"
   }
 }
