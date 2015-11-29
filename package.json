@@ -1,0 +1,41 @@
+{
+  "name": "loopback-connector-orchestrate",
+  "version": "0.1.0",
+  "description": "An Orchestrate connector for the LoopBack framework",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/srveit/loopback-connector-orchestrate.git"
+  },
+  "keywords": [
+    "StrongLoop",
+    "Orchestrate",
+    "LoopBack",
+    "Datasource",
+    "Connector"
+  ],
+  "author": "Stephen R. Veit <srveit@veitconsulting.com> (http://veitconsulting.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/srveit/loopback-connector-orchestrate/issues"
+  },
+  "homepage": "https://github.com/srveit/loopback-connector-orchestrate#readme",
+  "dependencies": {
+    "debug": "^2.2.0",
+    "loopback-connector": "^2.3.0",
+    "orchestrate": "^0.6.0"
+  },
+  "devDependencies": {
+    "gulp": "gulpjs/gulp#4.0",
+    "gulp-istanbul": "^0.10.3",
+    "gulp-jasmine": "^2.2.1",
+    "gulp-jslint": "^0.2.2",
+    "gulp-jsonlint": "^1.1.1",
+    "gulp-load-plugins": "^1.1.0",
+    "jasmine-core": "^2.3.4",
+    "jasmine-spec-reporter": "^2.4.0"
+  }
+}
