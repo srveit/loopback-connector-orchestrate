@@ -102,6 +102,16 @@ describe('loopback-connector-orchestrate', function () {
         expect(dbConstructor).toHaveBeenCalledWith(token, apiEndpoint);
         done();
       });
+      it('should set the connector name', function (done) {
+        expect(connector.name).toBe('orchestrate');
+        done();
+      });
+      it('should set the connector settings', function (done) {
+        expect(connector.settings).toEqual(jasmine.objectContaining({
+          token: token
+        }));
+        done();
+      });
       describe('getTypes', function () {
         var types;
         beforeEach(function (done) {
