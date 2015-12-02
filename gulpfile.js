@@ -66,7 +66,7 @@ config.istanbul = {
   },
   thresholds: {
     thresholds: {
-      global: 70
+      global: 7
     }
   }
 };

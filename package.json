@@ -24,10 +24,10 @@
   },
   "homepage": "https://github.com/srveit/loopback-connector-orchestrate#readme",
   "dependencies": {
+    "asap": "^2.0.3",
     "debug": "^2.2.0",
     "loopback-connector": "^2.3.0",
-    "orchestrate": "^0.6.0",
-    "promise": "^7.0.4"
+    "orchestrate": "^0.6.0"
   },
   "devDependencies": {
     "gulp": "gulpjs/gulp#4.0",
