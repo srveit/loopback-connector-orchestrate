@@ -112,25 +112,6 @@ describe('loopback-connector-orchestrate', function () {
         }));
         done();
       });
-      describe('getTypes', function () {
-        var types;
-        beforeEach(function (done) {
-          types = connector.getTypes();
-          done();
-        });
-        it('should include "db"', function (done) {
-          expect(types).toContain('db');
-          done();
-        });
-        it('should include "nosql"', function (done) {
-          expect(types).toContain('nosql');
-          done();
-        });
-        it('should include "orchestrate"', function (done) {
-          expect(types).toContain('orchestrate');
-          done();
-        });
-      });
       describe('and connect is called again', function () {
         beforeEach(function (done) {
           dbConstructor.calls.reset();
@@ -155,6 +136,36 @@ describe('loopback-connector-orchestrate', function () {
         });
         it('should not call nextTick', function (done) {
           expect(process.nextTick).not.toHaveBeenCalled();
+          done();
+        });
+      });
+      describe('getTypes', function () {
+        var types;
+        beforeEach(function (done) {
+          types = connector.getTypes();
+          done();
+        });
+        it('should include "db"', function (done) {
+          expect(types).toContain('db');
+          done();
+        });
+        it('should include "nosql"', function (done) {
+          expect(types).toContain('nosql');
+          done();
+        });
+        it('should include "orchestrate"', function (done) {
+          expect(types).toContain('orchestrate');
+          done();
+        });
+      });
+      describe('getDefaultIdType', function () {
+        var defaultIdType;
+        beforeEach(function (done) {
+          defaultIdType = connector.getDefaultIdType();
+          done();
+        });
+        it('should return String', function (done) {
+          expect(defaultIdType).toBe(String);
           done();
         });
       });
