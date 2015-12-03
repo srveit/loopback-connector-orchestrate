@@ -61,7 +61,7 @@ config.istanbul = {
   },
   reports: {
     dir: config.paths.coverage,
-    reporters: [ 'lcov' ],
+    reporters: [ 'lcov', 'text-summary' ],
     reportOpts: { dir: config.paths.coverage}
   },
   thresholds: {

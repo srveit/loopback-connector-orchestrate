@@ -39,6 +39,7 @@
     "gulp-shell": "^0.5.1",
     "jasmine-core": "^2.3.4",
     "jasmine-spec-reporter": "^2.4.0",
-    "jsdoc": "^3.4.0"
+    "jsdoc": "^3.4.0",
+    "q": "^1.4.1"
   }
 }

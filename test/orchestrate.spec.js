@@ -1,9 +1,25 @@
 'use strict';
 
 var lco = require('../index'),
-  oio = require('orchestrate');
+  oio = require('orchestrate'),
+  Q = require('q');
+
+function asap(callback) {
+  setTimeout(callback, 10);
+}
 
 describe('loopback-connector-orchestrate', function () {
+  var database, dbConstructor, pingDeferred;
+  beforeEach(function (done) {
+    database = jasmine.createSpyObj('orchestrate', [
+      'ping'
+    ]);
+    pingDeferred = Q.defer();
+    database.ping.and.returnValue(pingDeferred.promise);
+    dbConstructor = jasmine.createSpy('oio')
+      .and.returnValue(database);
+    done();
+  });
   it('should exist', function (done) {
     expect(lco).toEqual(jasmine.any(Object));
     done();
@@ -39,9 +55,7 @@ describe('loopback-connector-orchestrate', function () {
         });
       });
       describe('and no settings.dbConstructor', function () {
-        var dbConstructor;
         beforeEach(function (done) {
-          dbConstructor = jasmine.createSpy('oio');
           dataSource = {
             settings: {
               dbConstructor: dbConstructor
@@ -62,14 +76,8 @@ describe('loopback-connector-orchestrate', function () {
       });
     });
     describe('when called with callback', function () {
-      var dataSource, connector, dbConstructor, token, apiEndpoint, error,
-        database, returnedDatabase;
+      var dataSource, connector, token, apiEndpoint, error, returnedDatabase;
       beforeEach(function (done) {
-        database = jasmine.createSpyObj('orchestrate', [
-          'foo'
-        ]);
-        dbConstructor = jasmine.createSpy('oio')
-          .and.returnValue(database);
         token = 'token';
         apiEndpoint = 'example.com';
         dataSource = {
@@ -167,6 +175,42 @@ describe('loopback-connector-orchestrate', function () {
         it('should return String', function (done) {
           expect(defaultIdType).toBe(String);
           done();
+        });
+      });
+      describe('ping', function () {
+        var callback;
+        beforeEach(function (done) {
+          callback = jasmine.createSpy('callback');
+          connector.ping(callback);
+          done();
+        });
+        it('should call database.ping', function (done) {
+          expect(database.ping).toHaveBeenCalled();
+          done();
+        });
+        describe('and database.ping succeeds', function () {
+          beforeEach(function (done) {
+            pingDeferred.resolve();
+            asap(done);
+          });
+          it('should succeed', function (done) {
+            expect(callback).toHaveBeenCalledWith(null, undefined);
+            done();
+          });
+        });
+        describe('and database.ping fails', function () {
+          var pingError;
+          beforeEach(function (done) {
+            pingError = {
+              name: 'error'
+            };
+            pingDeferred.reject(pingError);
+            asap(done);
+          });
+          it('should fail', function (done) {
+            expect(callback).toHaveBeenCalledWith(pingError);
+            done();
+          });
         });
       });
     });
